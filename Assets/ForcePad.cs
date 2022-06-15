@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicJumpPad : MonoBehaviour
+public class ForcePad : MonoBehaviour
 {
+    public Player myPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class BasicJumpPad : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddForces(float x, float y, float z)
+    {
+        myPlayer.rb.AddForce(x, y, z);
     }
 }
