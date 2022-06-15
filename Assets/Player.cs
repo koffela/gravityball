@@ -14,6 +14,15 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    void Update()
+	{
+        //The player can jump using space, which is apparently aptly named "Jump"
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(0f, jumpHeight, 0f);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -27,11 +36,5 @@ public class Player : MonoBehaviour
         //clamp inputs so that moving diagonal doesn't give player extra speed
         movement = Vector3.ClampMagnitude(movement, 1);
         rb.AddForce(movement * speed);
-
-        //The player can jump using space, which is apparently aptly named "Jump"
-        if (Input.GetButtonDown("Jump"))
-        {
-            rb.AddForce(0f, jumpHeight, 0f);
-        }
     }
 }
