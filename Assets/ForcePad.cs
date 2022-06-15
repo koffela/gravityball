@@ -17,6 +17,7 @@ public class ForcePad : MonoBehaviour
         
     }
 
+    //function to add physical forces to the player object, to be used by child game objects of the forcepad class
     public void AddForces(float x, float y, float z)
     {
         myPlayer.rb.AddForce(x, y, z);
