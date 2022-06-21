@@ -8,13 +8,13 @@ public class ForcePad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //function to add physical forces to the player object, to be used by child game objects of the forcepad class
