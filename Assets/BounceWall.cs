@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpPadMed : ForcePad
+public class BounceWall : ForcePad
 {
+    [SerializeField] float xForce;
+    [SerializeField] float yForce;
+    [SerializeField] float zForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +18,11 @@ public class JumpPadMed : ForcePad
     {
         
     }
-
-    //Upon collision with the player, this GameObject will bounce the player upward significantly
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
-            AddForces(0f, 800f, 0f);
+            AddForces(xForce, yForce, zForce);
         }
     }
 }

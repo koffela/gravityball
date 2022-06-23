@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpeedPadMed : ForcePad
 {
+    [SerializeField] float rampForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class SpeedPadMed : ForcePad
     {
         if (col.gameObject.tag == "Player")
         {
-            AddForces(0f, 0f, 1500f);
+            AddForces(0f, 0f, rampForce);
         }
     }
 }
