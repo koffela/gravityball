@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateMed : ForcePad
+public class Rotate : ForcePad
 {
     [SerializeField] private Vector3 rotation;
     [SerializeField] private float speed;

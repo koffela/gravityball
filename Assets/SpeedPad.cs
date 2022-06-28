@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpPadMed : ForcePad
+public class SpeedPad : ForcePad
 {
+    [SerializeField] float rampForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +16,13 @@ public class JumpPadMed : ForcePad
     {
         
     }
-
-    //Upon collision with the player, this GameObject will bounce the player upward significantly
+    
+    //Upon collision with the player, this GameObject will give a significant speed boost
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
-            AddForces(0f, 800f, 0f);
+            AddForces(0f, 0f, rampForce);
         }
     }
 }
