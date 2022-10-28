@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     float turnSmoothVelocity;
     bool touchingGrass = false;
     bool speedBooster = true;
+
     //Get the rigidbody of the player
     void Start()
     {
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
 	{
         //The player can jump using space, which is apparently aptly named "Jump"
         //The player can only jump while touching the ground (touch grass XD)
-        if (Input.GetButtonDown("Jump")&&touchingGrass == true)
+        if (Input.GetButtonDown("Jump") && touchingGrass == true)
         {
             rb.AddForce(0f, jumpHeight, 0f);
             touchingGrass = false;
@@ -44,7 +45,9 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(x, 0f, z).normalized; 
         //combine the inputs into one vector to be used next
         //Vector3 movement = new Vector3(x, 0, z);
-        if(direction.magnitude >= 0.1f)
+
+        //might need an adjustment to player movement since player cannot move in midair now
+        if(direction.magnitude >= 0.1f && touchingGrass == true)
 		{
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -54,7 +57,8 @@ public class Player : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             //if the player is boosting and on the ground...
-            if(Input.GetButtonDown("speedbooster")&&touchingGrass == true&&speedBooster == true)
+            //may need a raycast for the booster as well
+            if(Input.GetButtonDown("speedbooster") && touchingGrass == true && speedBooster == true)
             {
                 speed = speed * 3.0f;
                 rb.AddForce(moveDir.normalized * speed);
@@ -72,7 +76,8 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         //gonna need a raycast so that the player cannot jump while in the air, since currently
-        //there is a bug where the player's jump ability is reset anytime they touch ground
+        //there is a bug where the player's jump ability is reset anytime they touch ground,
+        //which means it can be used in mid-air once, after touching an object
         if(col.gameObject.tag == "Ground")
         {
             touchingGrass = true;
